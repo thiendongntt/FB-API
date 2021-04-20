@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Số lượt like của 3 bài gần nhất</title>
+        <style>
+            
+            * {
+                margin: 0px;
+                padding: 0px;
+                box-sizing: border-box;
+            }
+            .heading-test {
+                margin: 10px 0px;
+                text-transform: uppercase;
+                font-size: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: brown;
+            }
+            #main {
+                margin: 0px 10px;
+                font-size: 20px;
+            }
+            
+         </style>
+
+    </head>
+    <body>
+
+        <div>
+            <span class="heading-test">Số lượt like của 3 bài gần nhất</span>
+            <ul>
+                <p id="main">
+                 
+                </p>
+            </ul>
+        </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+       
+    </body>
+    <script>
+       axios.get('https://graph.facebook.com/5951971017hoangdinhthiendong/posts?fields=likes.summary(true),comments,message&access_token=EAAAAZAw4FxQIBAGVU6sXwPxdbYHO7KUZAcOYepBxIw3IjD0XXFMpH9dIYsY0ZB07Vb648rKKH5jxiX5T0dzjrhqIprDo214FfqrllKgJZBjUCX1nY8dK22OquGxLCjjsUsuYPk4ZC8ZABeg8D4bLuHCq2XWAVxW1I8fWVMwBs3ngZDZD')
+        .then(response => {
+            var output = " ";
+            output += "  " + "- Số lượt like bài thứ nhất: " +
+            response.data.data[0].likes.summary.total_count + "<br>" + " - Số lượt like bài thứ hai: " +
+            response.data.data[1].likes.summary.total_count + "<br>" + "- Số lượt like bài thứ ba: " +
+            response.data.data[2].likes.summary.total_count + "<br>"
+
+            document.getElementById('main').innerHTML = output;
+        })
+        .catch(error => console.error(error));
+    </script>
+</html>
